@@ -2,6 +2,14 @@ from abc import ABC, abstractmethod
 from point import Point
 from typing import List
 import math
+from enum import Enum
+
+class Transformations(Enum):
+    SINUSOIDAL = "синусоидальное"
+    SPHERICAL = "сферическое"
+    POLAR = "полярное"
+    HEART = "сердце"
+    DISK = "диск"
 
 class Transformation(ABC):
     @abstractmethod
@@ -50,10 +58,14 @@ class DiskTransformation(Transformation):
         newY = (1 / math.pi) * angle * math.cos(math.pi * math.sqrt(r_squared))
         return Point(newX, newY)
 
-transformations: List[Transformation] = [
-    SinusoidalTransformation(),
-    SphericalTransformation(),
-    PolarTransformation(),
-    HeartTransformation(),
-    DiskTransformation(),
-]
+def add_transformation(transform: str, transformations: List[Transformation]):
+    if transform == Transformations.SINUSOIDAL.value:
+        transformations.append(SinusoidalTransformation())
+    elif transform == Transformations.SPHERICAL.value:
+        transformations.append(SphericalTransformation())
+    elif transform == Transformations.POLAR.value:
+        transformations.append(PolarTransformation())
+    elif transform == Transformations.HEART.value:
+        transformations.append(HeartTransformation())
+    elif transform == Transformations.DISK.value:
+        transformations.append(DiskTransformation())

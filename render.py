@@ -1,7 +1,8 @@
 from fractal import FractalImage
 from point import Point, RGB
-from transformation import transformations
 from image_processor import GammaCorrection
+from transformation import Transformation
+from typing import List
 import random
 
 class AffineTransformation:
@@ -30,7 +31,7 @@ def make_new_point(point: Point,  width: int, height: int) -> Point:
     y1 = int(height - ((YMAX - point.y) / (YMAX - YMIN)) * height)
     return Point(x1, y1)
 
-def render(n: int, eq_count: int, it : int, width: int, height: int) -> FractalImage:
+def render(n: int, eq_count: int, it : int, width: int, height: int, transformations: List[Transformation]) -> FractalImage:
     coeffs = [AffineTransformation() for _ in range(eq_count)]
 
     image = FractalImage.Create(width, height)
