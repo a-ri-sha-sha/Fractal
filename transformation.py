@@ -59,13 +59,14 @@ class DiskTransformation(Transformation):
         return Point(newX, newY)
 
 def add_transformation(transform: str, transformations: List[Transformation]):
-    if transform == Transformations.SINUSOIDAL.value:
-        transformations.append(SinusoidalTransformation())
-    elif transform == Transformations.SPHERICAL.value:
-        transformations.append(SphericalTransformation())
-    elif transform == Transformations.POLAR.value:
-        transformations.append(PolarTransformation())
-    elif transform == Transformations.HEART.value:
-        transformations.append(HeartTransformation())
-    elif transform == Transformations.DISK.value:
-        transformations.append(DiskTransformation())
+    match transform:
+        case Transformations.SINUSOIDAL.value:
+            transformations.append(SinusoidalTransformation())
+        case Transformations.SPHERICAL.value:
+            transformations.append(SphericalTransformation())
+        case Transformations.POLAR.value:
+            transformations.append(PolarTransformation())
+        case Transformations.HEART.value:
+            transformations.append(HeartTransformation())
+        case Transformations.DISK.value:
+            transformations.append(DiskTransformation())
